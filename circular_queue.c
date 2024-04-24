@@ -9,20 +9,20 @@ int rear = -1;
 void push()
 {
     int x;
-    if (rear==SIZE-1)
+    if ((rear+1)%SIZE==front)
         printf("Queue Overflow");
     else
     {
         printf("Enter an element: ");
         scanf("%d",&x);
-        if(rear==-1)
+        if(rear==-1 && front==-1)
         {
-            rear++;
-            front++;
+            rear = 0;
+            front = 0;
         }
         else
         {
-            rear++;
+            rear = (rear + 1) % SIZE;
             queue[rear]=x;
         }
     }
@@ -57,7 +57,7 @@ void pop()
         }
         else
         {   
-            front++;
+            front = (front+1) % SIZE;
         }
     }
     printf("Popped Element: %d",y);
@@ -68,8 +68,8 @@ int main()
     int choice;
     do
     {
-        printf("\nQueue Operations\n");
-        printf("1.push\n2.pop\n3.display\n4.exit\n");
+        printf("\tCircular Queue Operations\t");
+        printf("\n1.Push\n2.Pop\n3.Display\n4.Exit\n");
         printf("Enter your choice: ");
         scanf("%d",&choice);
         switch (choice)
